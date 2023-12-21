@@ -28,42 +28,9 @@ main {
   }
 }
 
-.btn--primary {
-  background-color: #0e576a;
-  border-radius: 1rem;
-  border: 1px solid #0e576a;
-  color: #fff;
-  cursor: pointer;
-  font-size: 16px;
-  margin: 0.2rem;
-  min-width: 200px;
-  padding: 15px;
-  text-decoration: none;
-  width: 100%;
-}
-
 .text-center {
   display: flex;
   justify-content: center;
-}
-
-
-/*  TABLE STYLING */
-table {
-  border-collapse: collapse;
-  margin-top: 20px;
-  width: 100%;
-}
-
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-}
-
-th {
-  background-color: #f2f2f2;
 }
 
 /* FLEXBOX STYLING */
@@ -80,24 +47,4 @@ th {
 .grid--default .grid-item {
   padding: 0 20px;
   width: 50%;
-}
-
-/* FORM STYLING */
-.form-group {
-  line-height: 1.5;
-}
-
-.form-control {
-  border-radius: 8px;
-  border: 2px solid #000;
-  font-size: 16px;
-  font-weight: 500;
-  height: 50px;
-  padding: 8px 4px;
-  transition: border .3s;
-  width: 100%;
-}
-
-.form-control:hover {
-  border: 2px solid #0e576a;
 }
