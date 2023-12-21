@@ -1,17 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Button from "./components/Button";
+import useScheduleData from "./components/useScheduleData";
 import Schedule from "./components/ScheduleList";
 import Filter from "./components/Filter";
 import StopDetails from "./components/StopDetails";
 
 export default function Home() {
-  const [selectedButton, setSelectedButton] = useState<string | null>(null);
   const [selectedRoute, setSelectedRoute] = useState<string>("");
-
-  const handleButtonClick = (buttonName: string) => {
-    setSelectedButton(buttonName);
-  };
+  const { availableRoutes } = useScheduleData();
 
   const handleFilterChange = (route: string) => {
     setSelectedRoute(route);
@@ -27,29 +24,20 @@ export default function Home() {
               <Button
                 className="btn--primary"
                 label="Lade Busfahrplan"
-                onClick={() => handleButtonClick("schedule")}
+                onClick={() => {}}
               />
             </div>
             <div className="grid-item">
               <Filter
-                routes={["Route A", "Route B", "Route C"]} //now as a test - probably have to refactor to use data from json
+                availableRoutes={availableRoutes}
                 onFilterChange={handleFilterChange}
-              />
-            </div>
-            <div className="grid-item">
-              <Button
-                className="btn--primary"
-                label="Test Button 2"
-                onClick={() => console.log("Test2")}
               />
             </div>
           </div>
         </div>
       </div>
 
-      {selectedButton === "schedule" && (
-        <Schedule selectedRoute={selectedRoute} />
-      )}
+      <Schedule selectedRoute={selectedRoute} />
     </main>
   );
 }

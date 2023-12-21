@@ -1,47 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { GET } from "../api/schedule/route";
+import React from "react";
 import { BeatLoader } from "react-spinners";
-
-interface BusStop {
-  route: string;
-  stops: {
-    name: string;
-    time: string;
-  }[];
-}
+import useScheduleData from "../components/useScheduleData";
 
 interface ScheduleProps {
   selectedRoute: string;
 }
 
-
 const Schedule: React.FC<ScheduleProps> = ({ selectedRoute }) => {
-  const [scheduleData, setScheduleData] = useState<BusStop[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { scheduleData, loading } = useScheduleData();
 
-  useEffect(() => {
-    const fetchScheduleData = async () => {
-      try {
-        setLoading(true);
-        const response = await GET();
-        const data: BusStop[] = await response.json();
-
-        // if route is selected, filter the plan/data
-        const filteredData = selectedRoute
-          ? data.filter((route) => route.route === selectedRoute)
-          : data;
-
-        setScheduleData(filteredData);
-      } catch (error) {
-        console.error("Error fetching schedule data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchScheduleData();
-  }, [selectedRoute]);
+  const filteredData = selectedRoute
+    ? scheduleData.filter((route) => route.route === selectedRoute)
+    : scheduleData;
 
   return (
     <div className="content-area">
@@ -51,7 +22,7 @@ const Schedule: React.FC<ScheduleProps> = ({ selectedRoute }) => {
             <BeatLoader color="#000000" size={10} margin={3} />
           </div>
         ) : (
-          scheduleData.length > 0 && (
+          filteredData.length > 0 && (
             <div>
               <h2>Busfahrplan</h2>
               <table>
@@ -63,7 +34,7 @@ const Schedule: React.FC<ScheduleProps> = ({ selectedRoute }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {scheduleData.map((route, index) => (
+                  {filteredData.map((route, index) => (
                     <React.Fragment key={`${route.route}-${index}`}>
                       {route.stops.map((stop, stopIndex) => (
                         <tr key={`${stop.name}-${stopIndex}`}>

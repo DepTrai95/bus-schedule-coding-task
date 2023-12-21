@@ -1,12 +1,12 @@
-// Filter.tsx
+"use client";
 import React, { useState, useEffect } from "react";
 
 interface FilterProps {
-  routes: string[];
+  availableRoutes: string[];
   onFilterChange: (selectedRoute: string) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ routes, onFilterChange }) => {
+const Filter: React.FC<FilterProps> = ({ availableRoutes, onFilterChange }) => {
   const [selectedRoute, setSelectedRoute] = useState("");
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Filter: React.FC<FilterProps> = ({ routes, onFilterChange }) => {
         onChange={(e) => setSelectedRoute(e.target.value)}
       >
         <option value="">Alle Routen</option>
-        {routes.map((route) => (
+        {availableRoutes.map((route) => (
           <option key={route} value={route}>
             {route}
           </option>

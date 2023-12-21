@@ -39,8 +39,8 @@ main {
   min-width: 200px;
   padding: 15px;
   text-decoration: none;
+  width: 100%;
 }
-
 
 .text-center {
   display: flex;
@@ -69,7 +69,7 @@ th {
 /* FLEXBOX STYLING */
 
 .grid--default {
-  align-items: center;
+  align-items: flex-end;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -79,7 +79,7 @@ th {
 
 .grid--default .grid-item {
   padding: 0 20px;
-  width: calc(100% / 3);
+  width: 50%;
 }
 
 /* FORM STYLING */
