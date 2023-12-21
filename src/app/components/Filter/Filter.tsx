@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import "./Filter.css";
 
 interface FilterProps {
   availableRoutes: string[];

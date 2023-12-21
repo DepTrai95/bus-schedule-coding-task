@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import Button from "./components/Button";
+import Button from "./components/Button/Button";
 import useScheduleData from "./components/useScheduleData";
-import Schedule from "./components/ScheduleList";
-import Filter from "./components/Filter";
-import StopDetails from "./components/StopDetails";
+import Schedule from "./components/ScheduleList/ScheduleList";
+import Filter from "./components/Filter/Filter";
 
 export default function Home() {
   const [selectedRoute, setSelectedRoute] = useState<string>("");

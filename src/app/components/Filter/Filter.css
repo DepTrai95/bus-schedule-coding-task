@@ -1,0 +1,19 @@
+/* FORM STYLING */
+.form-group {
+   line-height: 1.5;
+}
+
+.form-control {
+   border-radius: 8px;
+   border: 2px solid #000;
+   font-size: 16px;
+   font-weight: 500;
+   height: 50px;
+   padding: 8px 4px;
+   transition: border .3s;
+   width: 100%;
+}
+
+.form-control:hover {
+   border: 2px solid #0e576a;
+}
