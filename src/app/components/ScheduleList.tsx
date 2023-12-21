@@ -11,7 +11,12 @@ interface BusStop {
   }[];
 }
 
-const Schedule: React.FC = () => {
+interface ScheduleProps {
+  selectedRoute: string;
+}
+
+
+const Schedule: React.FC<ScheduleProps> = ({ selectedRoute }) => {
   const [scheduleData, setScheduleData] = useState<BusStop[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +26,13 @@ const Schedule: React.FC = () => {
         setLoading(true);
         const response = await GET();
         const data: BusStop[] = await response.json();
-        setScheduleData(data);
+
+        // if route is selected, filter the plan/data
+        const filteredData = selectedRoute
+          ? data.filter((route) => route.route === selectedRoute)
+          : data;
+
+        setScheduleData(filteredData);
       } catch (error) {
         console.error("Error fetching schedule data:", error);
       } finally {
@@ -30,7 +41,7 @@ const Schedule: React.FC = () => {
     };
 
     fetchScheduleData();
-  }, []);
+  }, [selectedRoute]);
 
   return (
     <div className="content-area">

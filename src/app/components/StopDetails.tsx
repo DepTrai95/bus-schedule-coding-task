@@ -3,14 +3,17 @@ import React from "react";
 
 const StopDetails = () => {
    return (
-     <div>
-       <button
-         onClick={() => {
-           console.log("Clicked Stop Details");
-         }}
-       >
-         Click me - Stop Details Component
-       </button>
+     <div className="content-area">
+       <div className="inner">
+         <button
+           className="btn--primary"
+           onClick={() => {
+             console.log("Clicked Stop Details");
+           }}
+         >
+           Stop Details Component
+         </button>
+       </div>
      </div>
    );
 }
