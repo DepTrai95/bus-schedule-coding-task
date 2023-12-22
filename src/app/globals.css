@@ -45,6 +45,12 @@ main {
 }
 
 .grid--default .grid-item {
-  padding: 0 20px;
+  padding: 0 10px;
   width: 50%;
+}
+
+@media (min-width: 600px) {
+  .grid--default .grid-item {
+    padding: 0 20px;
+  }
 }
