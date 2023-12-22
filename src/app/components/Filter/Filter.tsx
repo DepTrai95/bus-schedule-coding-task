@@ -18,10 +18,11 @@ const Filter: React.FC<FilterProps> = ({ availableRoutes, onFilterChange }) => {
     <div className="form-group">
       <label htmlFor="routeFilter">Filtern nach Route: </label>
       <select
+        aria-label="Nach Route filtern"
         className="form-control"
         id="routeFilter"
         value={selectedRoute}
-        onChange={(e) => setSelectedRoute(e.target.value)}
+        onChange={(event) => setSelectedRoute(event.target.value)}
       >
         <option value="">Alle Routen</option>
         {availableRoutes.map((route) => (

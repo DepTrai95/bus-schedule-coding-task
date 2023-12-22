@@ -1,6 +1,6 @@
-// StopDetails.tsx
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
 import "./StopDetails.css";
 
 interface StopDetailsProps {
@@ -14,16 +14,46 @@ const StopDetails: React.FC<StopDetailsProps> = ({
   routes,
   onClose,
 }) => {
+  const modalRoot = document.getElementById("modal-root") || document.body;
+
   const handleModalClosing = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
+    if (event.type === "click" && event.target === event.currentTarget) {
+      document.querySelector(".modal")?.removeAttribute("aria-modal");
       onClose();
     }
   };
 
-  return (
-    <div className="modal" onClick={handleModalClosing}>
+  // accessibility - closing with "esc"
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        document.querySelector(".modal")?.removeAttribute("aria-modal");
+        onClose();
+      }
+    };
+    // add EventListener if modal gets "created"
+    document.addEventListener("keydown", handleKeyDown);
+    // remove EventListener as soon as modal "closes"
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
+  const handleClose = () => {
+    document.querySelector(".modal")?.removeAttribute("aria-modal");
+    onClose();
+  };
+
+  return ReactDOM.createPortal(
+    <div
+      className="modal"
+      onClick={handleModalClosing}
+      role="dialog"
+      tabIndex={0}
+      aria-modal={true}
+    >
       <div className="modal-content">
-        <span className="close" onClick={onClose}>
+        <span className="close" onClick={handleClose}>
           &times;
         </span>
         <h2>{stopName} Details</h2>
@@ -33,7 +63,8 @@ const StopDetails: React.FC<StopDetailsProps> = ({
           ))}
         </ul>
       </div>
-    </div>
+    </div>,
+    modalRoot
   );
 };
 

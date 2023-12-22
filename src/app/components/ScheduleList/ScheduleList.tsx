@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { BeatLoader } from "react-spinners";
-import "./ScheduleList.css";
 import useScheduleData from "../useScheduleData";
 import StopDetails from "../StopDetails/StopDetails";
+
+import "./ScheduleList.css";
 
 interface ScheduleProps {
   selectedRoute: string;
@@ -31,16 +32,22 @@ const Schedule: React.FC<ScheduleProps> = ({ selectedRoute }) => {
     return `${formattedHours}:${minutes}`;
   };
 
+
+
   return (
     <div className="content-area">
       <div className="inner">
         {loading ? (
-          <div className="text-center">
-            <BeatLoader color="#000000" size={10} margin={3} />
+          <div className="loading-spinner">
+            <BeatLoader
+              color="#000000"
+              size={10}
+              margin={3}
+            />
           </div>
         ) : (
           filteredData.length > 0 && (
-            <div style={{overflow: "scroll"}}>
+            <div>
               <h2>Busfahrplan</h2>
               <table>
                 <thead>
@@ -59,7 +66,12 @@ const Schedule: React.FC<ScheduleProps> = ({ selectedRoute }) => {
                             <td rowSpan={route.stops.length}>{route.route}</td>
                           )}
                           <td onClick={() => handleStopClick(stop.name)}>
-                            {stop.name}
+                            <button
+                              aria-label={"Öffne Details zu " + stop.name}
+                              className="button-table-data"
+                            >
+                              {stop.name}
+                            </button>
                           </td>
                           <td>{formatTime(stop.time)}</td>
                         </tr>
@@ -96,8 +108,7 @@ const Schedule: React.FC<ScheduleProps> = ({ selectedRoute }) => {
                     ?.time || "",
               }))
               .sort((a, b) => a.time.localeCompare(b.time))
-              .sort((a, b) => a.route.localeCompare(b.route))
-            }
+              .sort((a, b) => a.route.localeCompare(b.route))}
             onClose={handleStopDetailsClose}
           />
         )}
