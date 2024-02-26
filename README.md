@@ -16,4 +16,6 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+Please note, that I haven't have done anything with React prior to this project, as I am more specialized in VanillaJS and Vue.js Applications.
+
 Or see it directly already deployed on [Netlify](https://nits-test-bus-application.netlify.app/)  
